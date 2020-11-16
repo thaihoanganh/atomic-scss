@@ -1,0 +1,17 @@
+@include float;
+
+@if setting-get('float', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include float($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('float', 'hover') {
+  @include float(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('float', 'active') {
+  @include float(a + $prefix-separator, $suffix-separator + active);
+}

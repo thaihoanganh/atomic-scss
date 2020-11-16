@@ -1,0 +1,17 @@
+@include opacity;
+
+@if setting-get('opacity', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include opacity($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('opacity', 'hover') {
+  @include opacity(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('opacity', 'active') {
+  @include opacity(a + $prefix-separator, $suffix-separator + active);
+}

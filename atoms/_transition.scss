@@ -1,0 +1,17 @@
+@include transition-duration;
+
+@if setting-get('transition-duration', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include transition-duration($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('transition-duration', 'hover') {
+  @include transition-duration(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('transition-duration', 'active') {
+  @include transition-duration(a + $prefix-separator, $suffix-separator + active);
+}

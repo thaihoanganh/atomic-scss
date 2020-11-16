@@ -1,0 +1,17 @@
+@include spacing;
+
+@if setting-get('spacing', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include spacing($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('spacing', 'hover') {
+  @include spacing(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('spacing', 'active') {
+  @include spacing(a + $prefix-separator, $suffix-separator + active);
+}

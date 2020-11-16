@@ -1,0 +1,17 @@
+@include border;
+
+@if setting-get('border', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include border($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('border', 'hover') {
+  @include border(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('border', 'active') {
+  @include border(a + $prefix-separator, $suffix-separator + active);
+}

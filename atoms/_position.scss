@@ -1,0 +1,17 @@
+@include position;
+
+@if setting-get('position', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include position($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('position', 'hover') {
+  @include position(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('position', 'active') {
+  @include position(a + $prefix-separator, $suffix-separator + active);
+}

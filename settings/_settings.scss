@@ -1,0 +1,112 @@
+// Map settings build css
+$settings: () !default;
+$settings: map-merge(
+  (
+    'position': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'display': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'flex': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'float': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'clear': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'sizing': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'spacing': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'border': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'overflow': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'background-colors': (
+      'responsive': false,
+      'hover': true,
+      'active': false,
+    ),
+    'colors': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'font-sizes': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'font-weights': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'text-alignment': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'text-transform': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'vertical-alignment': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'visibility': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'opacity': (
+      'responsive': false,
+      'hover': true,
+      'active': true,
+    ),
+    'cursors': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'transition-duration': (
+      'responsive': false,
+      'hover': false,
+      'active': false,
+    ),
+    'grid-columns': (
+      'responsive': true,
+      'hover': false,
+      'active': false,
+    ),
+  ),
+  $settings
+);

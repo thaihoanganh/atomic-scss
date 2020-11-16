@@ -1,0 +1,97 @@
+@include font-sizes;
+
+@if setting-get('font-sizes', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include font-sizes($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('font-sizes', 'hover') {
+  @include font-sizes(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('font-sizes', 'active') {
+  @include font-sizes(a + $prefix-separator, $suffix-separator + active);
+}
+
+// ----
+
+@include font-weights;
+
+@if setting-get('font-weights', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include font-weights($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('font-weights', 'hover') {
+  @include font-weights(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('font-weights', 'active') {
+  @include font-weights(a + $prefix-separator, $suffix-separator + active);
+}
+
+// ---
+
+@include text-alignment;
+
+@if setting-get('text-alignment', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include text-alignment($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('text-alignment', 'hover') {
+  @include text-alignment(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('text-alignment', 'active') {
+  @include text-alignment(a + $prefix-separator, $suffix-separator + active);
+}
+
+// ---
+
+@include text-transform;
+
+@if setting-get('text-transform', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include text-transform($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('text-transform', 'hover') {
+  @include text-transform(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('text-transform', 'active') {
+  @include text-transform(a + $prefix-separator, $suffix-separator + active);
+}
+
+// ---
+
+@include vertical-alignment;
+
+@if setting-get('vertical-alignment', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include vertical-alignment($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('vertical-alignment', 'hover') {
+  @include vertical-alignment(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('vertical-alignment', 'active') {
+  @include vertical-alignment(a + $prefix-separator, $suffix-separator + active);
+}

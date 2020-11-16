@@ -1,0 +1,17 @@
+@include display;
+
+@if setting-get('display', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include display($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('display', 'hover') {
+  @include display(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('display', 'active') {
+  @include display(a + $prefix-separator, $suffix-separator + active);
+}

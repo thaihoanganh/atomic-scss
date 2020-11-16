@@ -1,0 +1,18 @@
+@function contrast-color($color) {
+  @if (lightness($color) > 50) {
+    @return rgba(0, 0, 0, 0.87);
+  } @else {
+    @return rgba(255, 255, 255, 0.87);
+  }
+}
+
+@function setting-get($key, $option) {
+  @if map-get($settings, $key) {
+    $value: map-get(map-get($settings, $key), $option);
+    @if $value {
+      @return $value;
+    }
+    @return false;
+  }
+  @return false;
+}

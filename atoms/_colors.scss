@@ -1,0 +1,37 @@
+@include colors;
+
+@if setting-get('colors', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include colors($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('colors', 'hover') {
+  @include colors(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('colors', 'active') {
+  @include colors(a + $prefix-separator, $suffix-separator + active);
+}
+
+// ---
+
+@include background-colors;
+
+@if setting-get('background-colors', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include background-colors($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('background-colors', 'hover') {
+  @include background-colors(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('background-colors', 'active') {
+  @include background-colors(a + $prefix-separator, $suffix-separator + active);
+}

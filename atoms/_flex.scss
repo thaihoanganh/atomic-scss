@@ -1,0 +1,17 @@
+@include flex;
+
+@if setting-get('flex', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include flex($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('flex', 'hover') {
+  @include flex(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('flex', 'active') {
+  @include flex(a + $prefix-separator, $suffix-separator + active);
+}

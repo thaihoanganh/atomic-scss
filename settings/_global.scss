@@ -1,0 +1,164 @@
+$global-namespace: '.';
+
+$prefix-separator: '\\:';
+$suffix-separator: '\:';
+
+// Map of breakpoint values.
+$breakpoints: () !default;
+$breakpoints: map-merge(
+  (
+    'xs': 600px,
+    'md': 960px,
+    'lg': 1280px,
+    'xl': 1920px,
+  ),
+  $breakpoints
+);
+
+// Settings of the grid
+$column-count: 24 !default;
+
+// Map of sizing values.
+$sizes: () !default;
+$sizes: map-merge(
+  (
+    'a': auto,
+    '0': 0,
+    '5': 5%,
+    '10': 10%,
+    '15': 15%,
+    '20': 20%,
+    '25': 25%,
+    '30': 30%,
+    '35': 35%,
+    '40': 40%,
+    '45': 45%,
+    '50': 50%,
+    '55': 55%,
+    '60': 60%,
+    '65': 65%,
+    '70': 70%,
+    '75': 75%,
+    '80': 80%,
+    '85': 85%,
+    '90': 90%,
+    '95': 95%,
+    '100': 100%,
+  ),
+  $sizes
+);
+
+// Map of spacing values.
+$spacers: () !default;
+$spacers: map-merge(
+  (
+    'a': auto,
+    '0': 0,
+    '5': 5px,
+  ),
+  $spacers
+);
+
+// Map of border width values.
+$border-width: () !default;
+$border-width: map-merge(
+  (
+    '0': 0,
+    '1': 1px,
+    '2': 2px,
+    '3': 3px,
+  ),
+  $border-width
+);
+
+// Map of border radius values.
+$border-radius: () !default;
+$border-radius: map-merge(
+  (
+    '0': 0,
+    '1': 1px,
+    '2': 2px,
+    '3': 3px,
+  ),
+  $border-radius
+);
+
+// Map of font sizes values.
+$font-sizes: () !default;
+$font-sizes: map-merge(
+  (
+    '1': 0.625rem,
+    '2': 0.75,
+    '3': 0.825rem,
+    '4': 1rem,
+    '5': 1.125rem,
+    '6': 1.25rem,
+    '7': 1.375rem,
+    '8': 1.5rem,
+    '9': 1.625rem,
+    '10': 1.75rem,
+    '11': 1.825rem,
+    '12': 2rem,
+    '13': 2.125rem,
+    '14': 2.25rem,
+    '15': 2.375rem,
+    '16': 2.5rem,
+    '17': 2.625rem,
+    '18': 2.7rem,
+    '19': 2.825rem,
+    '20': 3rem,
+  ),
+  $font-sizes
+);
+
+// Map of font weights values.
+$font-weights: () !default;
+$font-weights: map-merge(
+  (
+    '1': 100,
+    '2': 200,
+    '3': 300,
+    '4': 400,
+    '5': 500,
+    '6': 600,
+    '7': 700,
+    '8': 800,
+    '9': 900,
+  ),
+  $font-weights
+);
+
+// Map of opacity values.
+$opacity: () !default;
+$opacity: map-merge(
+  (
+    '0': 0%,
+    '1': 10%,
+    '2': 20%,
+    '3': 30%,
+    '4': 40%,
+    '5': 50%,
+    '6': 60%,
+    '7': 70%,
+    '8': 80%,
+    '9': 90%,
+  ),
+  $opacity
+);
+
+// Map of transition duration values.
+$transition-duration: () !default;
+$transition-duration: map-merge(
+  (
+    '1': 100ms,
+    '2': 200ms,
+    '3': 300ms,
+    '4': 400ms,
+    '5': 500ms,
+    '6': 600ms,
+    '7': 700ms,
+    '8': 800ms,
+    '9': 900ms,
+  ),
+  $transition-duration
+);

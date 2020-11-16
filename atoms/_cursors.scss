@@ -1,0 +1,17 @@
+@include cursors;
+
+@if setting-get('cursors', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include cursors($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('cursors', 'hover') {
+  @include cursors(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('cursors', 'active') {
+  @include cursors(a + $prefix-separator, $suffix-separator + active);
+}

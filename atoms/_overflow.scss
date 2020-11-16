@@ -1,0 +1,17 @@
+@include overflow;
+
+@if setting-get('overflow', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include overflow($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('overflow', 'hover') {
+  @include overflow(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('overflow', 'active') {
+  @include overflow(a + $prefix-separator, $suffix-separator + active);
+}

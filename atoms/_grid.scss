@@ -1,0 +1,17 @@
+@include grid-columns;
+
+@if setting-get('grid-columns', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include grid-columns($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('grid-columns', 'hover') {
+  @include grid-columns(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('grid-columns', 'active') {
+  @include grid-columns(a + $prefix-separator, $suffix-separator + active);
+}

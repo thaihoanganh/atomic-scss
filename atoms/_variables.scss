@@ -1,0 +1,7 @@
+:root {
+  @include var-colors();
+}
+
+[data-theme='dark'] {
+  @include var-colors('dark');
+}

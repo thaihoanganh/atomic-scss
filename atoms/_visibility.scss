@@ -1,0 +1,17 @@
+@include visibility;
+
+@if setting-get('visibility', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include visibility($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('visibility', 'hover') {
+  @include visibility(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('visibility', 'active') {
+  @include visibility(a + $prefix-separator, $suffix-separator + active);
+}

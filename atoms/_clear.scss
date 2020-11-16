@@ -1,0 +1,17 @@
+@include clear;
+
+@if setting-get('clear', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include clear($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('clear', 'hover') {
+  @include clear(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('clear', 'active') {
+  @include clear(a + $prefix-separator, $suffix-separator + active);
+}

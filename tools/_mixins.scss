@@ -1,0 +1,687 @@
+/// Mixin to output color variables.
+@mixin var-colors($theme: null) {
+  @if $theme != 'dark' {
+    --contrast-color-default: #{contrast-color(#fff)};
+    @each $level, $color-value in map-get($colors, 'black') {
+      @if type-of($color-value) == 'color' {
+        --color-overlay-#{$level}: #{$color-value};
+      }
+    }
+    @each $key, $value in $colors {
+      @if $key != 'white' and $key != 'black' {
+        @if map-has-key($value, '700') {
+          $color-value: map-get($value, '700');
+          @if type-of($color-value) == 'color' {
+            --color-#{$key}: #{$color-value};
+            --contrast-color-#{$key}: #{contrast-color($color-value)};
+          }
+        }
+      } @else {
+        $color-value: map-has-key($value, '100');
+        @if type-of($color-value) == 'color' {
+          --color-#{$key}: #{map-get($value, '0')};
+        }
+      }
+    }
+  } @else {
+    --contrast-color-default: #{contrast-color(#000)};
+    @each $level, $color-value in map-get($colors, 'white') {
+      @if type-of($color-value) == 'color' {
+        --color-overlay-#{$level}: #{$color-value};
+      }
+    }
+    @each $key, $value in $colors {
+      @if $key != 'white' and $key != 'black' {
+        @if map-has-key($value, '400') {
+          $color-value: map-get($value, '400');
+          @if type-of($color-value) == 'color' {
+            --color-#{$key}: #{$color-value};
+            --contrast-color-#{$key}: #{contrast-color($color-value)};
+          }
+        }
+      }
+    }
+  }
+}
+
+/// Mixin to output media queries.
+@mixin breakpoint($key: null) {
+  $breakpoint-value: map-get($breakpoints, $key);
+  @if $breakpoint-value {
+    @media (min-width: #{$breakpoint-value}) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+//  Private mixins to output utility classes.
+/// Mixin to output position utilities.
+@mixin position($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}pos-s#{$suffix} {
+    position: static;
+  }
+  #{$global-namespace}#{$prefix}pos-a#{$suffix} {
+    position: absolute;
+  }
+  #{$global-namespace}#{$prefix}pos-f#{$suffix} {
+    position: fixed;
+  }
+  #{$global-namespace}#{$prefix}pos-r#{$suffix} {
+    position: relative;
+  }
+  #{$global-namespace}#{$prefix}pos-st#{$suffix} {
+    position: sticky;
+  }
+}
+
+/// Mixin to output display utilities.
+@mixin display($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}d-n#{$suffix} {
+    display: none;
+  }
+  #{$global-namespace}#{$prefix}d-b#{$suffix} {
+    display: block;
+  }
+  #{$global-namespace}#{$prefix}d-f#{$suffix} {
+    display: flex;
+  }
+  #{$global-namespace}#{$prefix}d-if#{$suffix} {
+    display: inline-flex;
+  }
+  #{$global-namespace}#{$prefix}d-i#{$suffix} {
+    display: inline;
+  }
+  #{$global-namespace}#{$prefix}d-ib#{$suffix} {
+    display: inline-block;
+  }
+  #{$global-namespace}#{$prefix}d-tb#{$suffix} {
+    display: table;
+  }
+  #{$global-namespace}#{$prefix}d-tbr#{$suffix} {
+    display: table-row;
+  }
+  #{$global-namespace}#{$prefix}d-tbc#{$suffix} {
+    display: table-cell;
+  }
+  #{$global-namespace}#{$prefix}d-li#{$suffix} {
+    display: list-item;
+  }
+  #{$global-namespace}#{$prefix}d-ri#{$suffix} {
+    display: run-in;
+  }
+  #{$global-namespace}#{$prefix}d-cp#{$suffix} {
+    display: compact;
+  }
+  #{$global-namespace}#{$prefix}d-itb#{$suffix} {
+    display: inline-table;
+  }
+  #{$global-namespace}#{$prefix}d-tbcl#{$suffix} {
+    display: table-column;
+  }
+  #{$global-namespace}#{$prefix}d-tbclg#{$suffix} {
+    display: table-column-group;
+  }
+  #{$global-namespace}#{$prefix}d-tbgh#{$suffix} {
+    display: table-header-group;
+  }
+  #{$global-namespace}#{$prefix}d-tbfg#{$suffix} {
+    display: table-footer-group;
+  }
+  #{$global-namespace}#{$prefix}d-tbrg#{$suffix} {
+    display: table-row-group;
+  }
+}
+
+/// Mixin to output flex utilities.
+@mixin flex($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}fxd-r#{$suffix} {
+    flex-direction: row;
+  }
+  #{$global-namespace}#{$prefix}fxd-rr#{$suffix} {
+    flex-direction: row-reverse;
+  }
+  #{$global-namespace}#{$prefix}fxd-c#{$suffix} {
+    flex-direction: column;
+  }
+  #{$global-namespace}#{$prefix}fxd-cr#{$suffix} {
+    flex-direction: column-reverse;
+  }
+
+  #{$global-namespace}#{$prefix}fxw-nw#{$suffix} {
+    flex-wrap: nowrap;
+  }
+  #{$global-namespace}#{$prefix}fxw-w#{$suffix} {
+    flex-wrap: wrap;
+  }
+  #{$global-namespace}#{$prefix}fxw-wr#{$suffix} {
+    flex-wrap: wrap-reverse;
+  }
+
+  #{$global-namespace}#{$prefix}fxf-r#{$suffix} {
+    flex-flow: row;
+  }
+  #{$global-namespace}#{$prefix}fxf-rr#{$suffix} {
+    flex-flow: row-reverse;
+  }
+  #{$global-namespace}#{$prefix}fxf-c#{$suffix} {
+    flex-flow: column;
+  }
+  #{$global-namespace}#{$prefix}fxf-cr#{$suffix} {
+    flex-flow: column-reverse;
+  }
+  #{$global-namespace}#{$prefix}fxf-nw#{$suffix} {
+    flex-flow: nowrap;
+  }
+  #{$global-namespace}#{$prefix}fxf-w#{$suffix} {
+    flex-flow: wrap;
+  }
+  #{$global-namespace}#{$prefix}fxf-wr#{$suffix} {
+    flex-flow: wrap-reverse;
+  }
+
+  #{$global-namespace}#{$prefix}jc-fs#{$suffix} {
+    justify-content: flex-start;
+  }
+  #{$global-namespace}#{$prefix}jc-fe#{$suffix} {
+    justify-content: flex-end;
+  }
+  #{$global-namespace}#{$prefix}jc-w#{$suffix} {
+    justify-content: center;
+  }
+  #{$global-namespace}#{$prefix}jc-sb#{$suffix} {
+    justify-content: space-between;
+  }
+  #{$global-namespace}#{$prefix}jc-sa#{$suffix} {
+    justify-content: space-around;
+  }
+  #{$global-namespace}#{$prefix}jc-se#{$suffix} {
+    justify-content: space-evenly;
+  }
+  #{$global-namespace}#{$prefix}jc-s#{$suffix} {
+    justify-content: stretch;
+  }
+
+  #{$global-namespace}#{$prefix}ai-fs#{$suffix} {
+    align-items: flex-start;
+  }
+  #{$global-namespace}#{$prefix}ai-fs#{$suffix} {
+    align-items: flex-end;
+  }
+  #{$global-namespace}#{$prefix}ai-c#{$suffix} {
+    align-items: center;
+  }
+  #{$global-namespace}#{$prefix}ai-b#{$suffix} {
+    align-items: baseline;
+  }
+  #{$global-namespace}#{$prefix}ai-st#{$suffix} {
+    align-items: stretch;
+  }
+
+  #{$global-namespace}#{$prefix}ac-fs#{$suffix} {
+    align-content: flex-start;
+  }
+  #{$global-namespace}#{$prefix}ac-fe#{$suffix} {
+    align-content: flex-end;
+  }
+  #{$global-namespace}#{$prefix}ac-c#{$suffix} {
+    align-content: center;
+  }
+  #{$global-namespace}#{$prefix}ac-sb#{$suffix} {
+    align-content: space-between;
+  }
+  #{$global-namespace}#{$prefix}ac-sa#{$suffix} {
+    align-content: space-around;
+  }
+  #{$global-namespace}#{$prefix}ac-st#{$suffix} {
+    align-content: stretch;
+  }
+
+  #{$global-namespace}#{$prefix}fxg-1#{$suffix} {
+    flex-grow: 1;
+  }
+
+  #{$global-namespace}#{$prefix}fxs-0#{$suffix} {
+    flex-shrink: 0;
+  }
+  #{$global-namespace}#{$prefix}fxs-1#{$suffix} {
+    flex-shrink: 1;
+  }
+
+  #{$global-namespace}#{$prefix}fxb-a#{$suffix} {
+    flex-basis: auto;
+  }
+  #{$global-namespace}#{$prefix}fxb-n#{$suffix} {
+    flex-basis: none;
+  }
+
+  #{$global-namespace}#{$prefix}fx-a#{$suffix} {
+    flex: auto;
+  }
+  #{$global-namespace}#{$prefix}fx-n#{$suffix} {
+    flex: none;
+  }
+
+  #{$global-namespace}#{$prefix}as-a#{$suffix} {
+    align-self: auto;
+  }
+  #{$global-namespace}#{$prefix}as-fs#{$suffix} {
+    align-self: flex-start;
+  }
+  #{$global-namespace}#{$prefix}as-fe#{$suffix} {
+    align-self: flex-end;
+  }
+  #{$global-namespace}#{$prefix}as-c#{$suffix} {
+    align-self: center;
+  }
+  #{$global-namespace}#{$prefix}as-b#{$suffix} {
+    align-self: baseline;
+  }
+  #{$global-namespace}#{$prefix}as-st#{$suffix} {
+    align-self: stretch;
+  }
+}
+
+/// Mixin to output float utilities.
+@mixin float($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}fl-n#{$suffix} {
+    float: none;
+  }
+  #{$global-namespace}#{$prefix}fl-l#{$suffix} {
+    float: left;
+  }
+  #{$global-namespace}#{$prefix}fl-r#{$suffix} {
+    float: right;
+  }
+}
+
+/// Mixin to output clear utilities.
+@mixin clear($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}cl-n#{$suffix} {
+    clear: none;
+  }
+  #{$global-namespace}#{$prefix}cl-b#{$suffix} {
+    clear: both;
+  }
+  #{$global-namespace}#{$prefix}cl-l#{$suffix} {
+    clear: left;
+  }
+  #{$global-namespace}#{$prefix}cl-r#{$suffix} {
+    clear: right;
+  }
+}
+
+/// Mixin to output sizing utilities.
+@mixin sizing($prefix: null, $suffix: null) {
+  @each $key, $value in $sizes {
+    @if type-of($value) == 'number' or $value == 'auto' or str-index($value, 'var(--') {
+      #{$global-namespace}#{$prefix}w-#{$key}#{$suffix} {
+        width: #{$value};
+      }
+      #{$global-namespace}#{$prefix}miw-#{$key}#{$suffix} {
+        min-width: #{$value};
+      }
+      #{$global-namespace}#{$prefix}maw-#{$key}#{$suffix} {
+        max-width: #{$value};
+      }
+      #{$global-namespace}#{$prefix}h-#{$key}#{$suffix} {
+        height: #{$value};
+      }
+      #{$global-namespace}#{$prefix}mih-#{$key}#{$suffix} {
+        min-height: #{$value};
+      }
+      #{$global-namespace}#{$prefix}mah-#{$key}#{$suffix} {
+        max-height: #{$value};
+      }
+    }
+  }
+}
+
+/// Mixin to output spacing utilities.
+@mixin spacing($prefix: null, $suffix: null) {
+  @each $key, $value in $spacers {
+    @if type-of($value) == 'number' or $value == 'auto' or str-index($value, 'var(--') {
+      #{$global-namespace}#{$prefix}p-#{$key}#{$suffix} {
+        padding: #{$value};
+      }
+      #{$global-namespace}#{$prefix}p-t-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}p-y-#{$key}#{$suffix} {
+        padding-top: #{$value};
+      }
+      #{$global-namespace}#{$prefix}p-b-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}p-y-#{$key}#{$suffix} {
+        padding-bottom: #{$value};
+      }
+      #{$global-namespace}#{$prefix}p-l-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}p-x-#{$key}#{$suffix} {
+        padding-left: #{$value};
+      }
+      #{$global-namespace}#{$prefix}p-r-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}p-x-#{$key}#{$suffix} {
+        padding-right: #{$value};
+      }
+
+      #{$global-namespace}#{$prefix}m-#{$key}#{$suffix} {
+        margin: #{$value};
+      }
+      #{$global-namespace}#{$prefix}m-t-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}m-y-#{$key}#{$suffix} {
+        margin-top: #{$value};
+      }
+      #{$global-namespace}#{$prefix}m-b-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}m-y-#{$key}#{$suffix} {
+        margin-bottom: #{$value};
+      }
+      #{$global-namespace}#{$prefix}m-l-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}m-x-#{$key}#{$suffix} {
+        margin-left: #{$value};
+      }
+      #{$global-namespace}#{$prefix}m-r-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}m-x-#{$key}#{$suffix} {
+        margin-right: #{$value};
+      }
+    }
+  }
+}
+
+/// Mixin to output overflow utilities.
+@mixin border($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}bd-d#{$suffix} {
+    border: 1px dotted var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-da#{$suffix} {
+    border: 1px dashed var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-do#{$suffix} {
+    border: 1px double var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-g#{$suffix} {
+    border: 1px groove var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-h#{$suffix} {
+    border: 1px hidden var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-i#{$suffix} {
+    border: 1px inset var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-n#{$suffix} {
+    border: 1px none var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-o#{$suffix} {
+    border: 1px outset var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-r#{$suffix} {
+    border: 1px ridge var(--color-overlay-12);
+  }
+  #{$global-namespace}#{$prefix}bd-s#{$suffix} {
+    border: 1px solid var(--color-overlay-12);
+  }
+
+  @each $key, $value in $border-width {
+    @if type-of($value) == 'number' or str-index($color-value, 'var(--') {
+      #{$global-namespace}#{$prefix}bdw-#{$key}#{$suffix} {
+        border-width: #{$value};
+      }
+      #{$global-namespace}#{$prefix}bdw-t-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}bdw-y-#{$key}#{$suffix} {
+        border-top-width: #{$value};
+      }
+      #{$global-namespace}#{$prefix}bdw-b-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}bdw-y-#{$key}#{$suffix} {
+        border-bottom-width: #{$value};
+      }
+      #{$global-namespace}#{$prefix}bdw-r-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}bdw-x-#{$key}#{$suffix} {
+        border-right-width: #{$value};
+      }
+      #{$global-namespace}#{$prefix}bdw-l-#{$key}#{$suffix},
+      #{$global-namespace}#{$prefix}bdw-x-#{$key}#{$suffix} {
+        border-left-width: #{$value};
+      }
+    }
+  }
+
+  @if map-get($colors, 'white') {
+    @each $key, $value in map-get($colors, 'white') {
+      @if type-of($value) == 'color' {
+        #{$global-namespace}#{$prefix}bdc-ov-#{$key}#{$suffix} {
+          border-color: var(--color-overlay-#{$key});
+        }
+      }
+    }
+  }
+  @each $key, $value in $colors {
+    @if $key != 'white' and $key != 'black' {
+      #{$global-namespace}#{$prefix}bdc-#{$key}#{$suffix} {
+        border-color: var(--color-#{$key});
+      }
+    }
+  }
+}
+
+/// Mixin to output overflow utilities.
+@mixin overflow($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}ov-a#{$suffix} {
+    overflow: auto;
+  }
+  #{$global-namespace}#{$prefix}ov-h#{$suffix} {
+    overflow: hidden;
+  }
+  #{$global-namespace}#{$prefix}ov-s#{$suffix} {
+    overflow: scroll;
+  }
+  #{$global-namespace}#{$prefix}ov-v#{$suffix} {
+    overflow: visible;
+  }
+
+  #{$global-namespace}#{$prefix}ovx-a#{$suffix} {
+    overflow-x: auto;
+  }
+  #{$global-namespace}#{$prefix}ovx-h#{$suffix} {
+    overflow-x: hidden;
+  }
+  #{$global-namespace}#{$prefix}ovx-s#{$suffix} {
+    overflow-x: scroll;
+  }
+  #{$global-namespace}#{$prefix}ovx-v#{$suffix} {
+    overflow-x: visible;
+  }
+
+  #{$global-namespace}#{$prefix}ovy-a#{$suffix} {
+    overflow-y: auto;
+  }
+  #{$global-namespace}#{$prefix}ovy-h#{$suffix} {
+    overflow-y: hidden;
+  }
+  #{$global-namespace}#{$prefix}ovy-s#{$suffix} {
+    overflow-y: scroll;
+  }
+  #{$global-namespace}#{$prefix}ovy-v#{$suffix} {
+    overflow-y: visible;
+  }
+}
+
+/// Mixin to output background color utilities.
+@mixin background-colors($prefix: null, $suffix: null) {
+  @each $key, $value in $colors {
+    @each $color-level, $color-value in $value {
+      @if type-of($color-value) == 'color' or str-index($color-value, 'var(--') {
+        #{$global-namespace}#{$prefix}bgc-#{$key}-#{$color-level}#{$suffix} {
+          background-color: #{$color-value};
+        }
+      }
+    }
+  }
+}
+
+/// Mixin to output color utilities.
+@mixin colors($prefix: null, $suffix: null) {
+  @each $key, $value in $colors {
+    #{$global-namespace}#{$prefix}cl-#{$key}#{$suffix} {
+      color: var(--#{$key});
+    }
+    @if $key != 'white' and $key != 'black' {
+      #{$global-namespace}#{$prefix}cl-contrast-#{$key}#{$suffix} {
+        color: var(--contrast-#{$key});
+      }
+    }
+  }
+}
+
+/// Mixin to font size color utilities.
+@mixin font-sizes($prefix: null, $suffix: null) {
+  @each $key, $value in $font-sizes {
+    @if type-of($value) == 'number' or str-index($value, 'var(--') {
+      #{$global-namespace}#{$prefix}fz-#{$key}#{$suffix} {
+        font-size: #{$value};
+      }
+    }
+  }
+}
+
+/// Mixin to font weight utilities.
+@mixin font-weights($prefix: null, $suffix: null) {
+  @each $key, $value in $font-weights {
+    @if type-of($value) == 'number' or str-index($value, 'var(--') {
+      #{$global-namespace}#{$prefix}fw-#{$key}#{$suffix} {
+        font-weight: #{$value};
+      }
+    }
+  }
+}
+
+/// Mixin to text alignment utilities.
+@mixin text-alignment($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}ta-c#{$suffix} {
+    text-align: center;
+  }
+  #{$global-namespace}#{$prefix}ta-r#{$suffix} {
+    text-align: right;
+  }
+  #{$global-namespace}#{$prefix}ta-l#{$suffix} {
+    text-align: left;
+  }
+  #{$global-namespace}#{$prefix}ta-j#{$suffix} {
+    text-align: justify;
+  }
+}
+
+/// Mixin to text transform utilities.
+@mixin text-transform($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}tt-n#{$suffix} {
+    text-transform: none;
+  }
+  #{$global-namespace}#{$prefix}tt-c#{$suffix} {
+    text-transform: capitalize;
+  }
+  #{$global-namespace}#{$prefix}tt-u#{$suffix} {
+    text-transform: uppercase;
+  }
+  #{$global-namespace}#{$prefix}tt-l#{$suffix} {
+    text-transform: lowercase;
+  }
+}
+
+/// Mixin to vertical alignment utilities.
+@mixin vertical-alignment($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}va-b#{$suffix} {
+    vertical-align: bottom;
+  }
+  #{$global-namespace}#{$prefix}va-bl#{$suffix} {
+    vertical-align: baseline;
+  }
+  #{$global-namespace}#{$prefix}va-m#{$suffix} {
+    vertical-align: middle;
+  }
+  #{$global-namespace}#{$prefix}va-sub#{$suffix} {
+    vertical-align: sub;
+  }
+  #{$global-namespace}#{$prefix}va-sup#{$suffix} {
+    vertical-align: super;
+  }
+  #{$global-namespace}#{$prefix}va-t#{$suffix} {
+    vertical-align: top;
+  }
+  #{$global-namespace}#{$prefix}va-tb#{$suffix} {
+    vertical-align: text-bottom;
+  }
+  #{$global-namespace}#{$prefix}va-tt#{$suffix} {
+    vertical-align: text-top;
+  }
+}
+
+/// Mixin to visibility utilities.
+@mixin visibility($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}v-v#{$suffix} {
+    visibility: visible;
+  }
+  #{$global-namespace}#{$prefix}v-h#{$suffix} {
+    visibility: hidden;
+  }
+  #{$global-namespace}#{$prefix}v-c#{$suffix} {
+    visibility: collapse;
+  }
+}
+
+/// Mixin to opacity utilities.
+@mixin opacity($prefix: null, $suffix: null) {
+  @each $key, $value in $opacity {
+    @if type-of($value) == 'number' or str-index($value, 'var(--') {
+      #{$global-namespace}#{$prefix}opa-#{$key}#{$suffix} {
+        opacity: #{$value};
+      }
+    }
+  }
+}
+
+/// Mixin to transition duration utilities.
+@mixin transition-duration($prefix: null, $suffix: null) {
+  @each $key, $value in $transition-duration {
+    @if type-of($value) == 'number' or str-index($value, 'var(--') {
+      #{$global-namespace}#{$prefix}trsdu-#{$key}#{$suffix} {
+        transition-duration: #{$value};
+      }
+    }
+  }
+}
+
+/// Mixin to cursors utilities.
+@mixin cursors($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}cur-a#{$suffix} {
+    cursor: auto;
+  }
+  #{$global-namespace}#{$prefix}cur-d#{$suffix} {
+    cursor: default;
+  }
+  #{$global-namespace}#{$prefix}cur-p#{$suffix} {
+    cursor: pointer;
+  }
+}
+
+// -----------------------------------------------
+
+@mixin grid-columns($prefix: null, $suffix: null) {
+  #{$global-namespace}#{$prefix}col#{$suffix} {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+
+  @if type-of($column-count) == 'number' and unitless($column-count) {
+    @for $i from 0 through $column-count {
+      @if $i == 0 {
+        #{$global-namespace}#{$prefix}col-auto#{$suffix} {
+          flex: 0 0 auto;
+          width: auto;
+          max-width: 100%;
+        }
+      } @else {
+        #{$global-namespace}#{$prefix}col-#{$i}#{$suffix} {
+          flex: 0 0 #{$i / $column-count * 100%};
+          max-width: #{$i / $column-count * 100%};
+        }
+      }
+    }
+  }
+}

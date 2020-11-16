@@ -1,0 +1,17 @@
+@include sizing;
+
+@if setting-get('sizing', 'responsive') {
+  @each $key, $value in $breakpoints {
+    @include breakpoint($key) {
+      @include sizing($key + $prefix-separator);
+    }
+  }
+}
+
+@if setting-get('sizing', 'hover') {
+  @include sizing(h + $prefix-separator, $suffix-separator + hover);
+}
+
+@if setting-get('sizing', 'active') {
+  @include sizing(a + $prefix-separator, $suffix-separator + active);
+}
